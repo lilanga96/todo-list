@@ -289,5 +289,51 @@ body{
     background-color: #d93c49;
 }
 
-
-
+.hour-slot {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    padding: 5px;
+    align-items: center;
+  }
+  
+  .hour-label {
+    width: 50px;
+    text-align: right;
+    padding-right: 10px;
+    font-weight: 600;
+  }
+  
+  .task-item {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+    flex-grow: 1;
+  }
+  
+  .week-view-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 10px;
+  }
+  
+  .week-day-column {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .view-selector {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  #task-view {
+    padding: 5px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  

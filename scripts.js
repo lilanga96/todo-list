@@ -218,3 +218,119 @@ function saveConsultationEntry(date, row) {
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const taskViewSelector = document.getElementById('task-view');
+    const daysContainer = document.querySelector('.days');
+  
+    // Mock task data for demonstration, including time
+    const tasks = [
+      { date: '2024-11-08', time: '09:00', task: 'Meeting with client' },
+      { date: '2024-11-08', time: '11:00', task: 'Submit report' },
+      { date: '2024-11-08', time: '13:00', task: 'Project presentation' },
+      { date: '2024-11-09', time: '10:00', task: 'Team stand-up' },
+    ];
+  
+    taskViewSelector.addEventListener('change', (event) => {
+      const selectedView = event.target.value;
+      renderTasks(selectedView);
+    });
+  
+    function renderTasks(view) {
+      daysContainer.innerHTML = ''; // Clear previous content
+  
+      if (view === 'list') {
+        render5HourView();
+      } else if (view === 'week') {
+        renderHourlyWeekView();
+      } else if (view === 'month') {
+        renderMonthView();
+      }
+    }
+  
+    function render5HourView() {
+      const currentDate = new Date();
+      const currentHour = currentDate.getHours();
+  
+      for (let offset = 0; offset < 5; offset++) {
+        const hour = currentHour + offset;
+        if (hour >= 24) break; // Stop if it goes beyond the day
+  
+        const hourSlot = document.createElement('div');
+        hourSlot.className = 'hour-slot';
+  
+        const hourLabel = document.createElement('div');
+        hourLabel.className = 'hour-label';
+        hourLabel.textContent = `${hour.toString().padStart(2, '0')}:00`;
+  
+        hourSlot.appendChild(hourLabel);
+  
+        // Append tasks for this specific hour
+        tasks.forEach(task => {
+          const taskDate = new Date(task.date);
+          const isToday = taskDate.toDateString() === currentDate.toDateString();
+          
+          if (isToday && task.time.startsWith(hour.toString().padStart(2, '0'))) {
+            const taskElement = document.createElement('div');
+            taskElement.className = 'task-item';
+            taskElement.textContent = task.task;
+            hourSlot.appendChild(taskElement);
+          }
+        });
+  
+        daysContainer.appendChild(hourSlot);
+      }
+    }
+  
+    function renderHourlyWeekView() {
+      const weekGrid = document.createElement('div');
+      weekGrid.className = 'week-view-grid';
+  
+      for (let day = 0; day < 7; day++) {
+        const dayColumn = document.createElement('div');
+        dayColumn.className = 'week-day-column';
+  
+        for (let hour = 0; hour < 24; hour++) {
+          const hourSlot = document.createElement('div');
+          hourSlot.className = 'hour-slot';
+  
+          const hourLabel = document.createElement('div');
+          hourLabel.className = 'hour-label';
+          hourLabel.textContent = `${hour.toString().padStart(2, '0')}:00`;
+  
+          hourSlot.appendChild(hourLabel);
+  
+          // Append tasks for this specific day and hour
+          tasks.forEach(task => {
+            const taskDate = new Date(task.date);
+            const today = new Date();
+            today.setDate(today.getDate() + day);
+  
+            if (taskDate.toDateString() === today.toDateString() && task.time.startsWith(hour.toString().padStart(2, '0'))) {
+              const taskElement = document.createElement('div');
+              taskElement.className = 'task-item';
+              taskElement.textContent = task.task;
+              hourSlot.appendChild(taskElement);
+            }
+          });
+  
+          dayColumn.appendChild(hourSlot);
+        }
+        weekGrid.appendChild(dayColumn);
+      }
+  
+      daysContainer.appendChild(weekGrid);
+    }
+  
+    function renderMonthView() {
+      for (let i = 1; i <= 31; i++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'day';
+        dayElement.textContent = i;
+        daysContainer.appendChild(dayElement);
+      }
+    }
+  
+    // Initial load (default to list view)
+    renderTasks('list');
+  });
+  
