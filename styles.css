@@ -1,0 +1,293 @@
+:root{
+    --primary-color: #f90a39;
+    --text-color: #1d1d1d;
+    --bg-color: #f1f1fb;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+}
+
+body{
+    background-color: #fff;
+}
+
+.container{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar{
+  width: 100%;  
+  max-width: 600px;
+  padding: 30px 20px;
+  border-radius: 10px;
+  background-color: var(--bg-color);
+}
+
+.calendar .header{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 20px;
+   padding-bottom:20px ;
+   border-bottom: 2px solid #ccc;
+}
+
+.calendar .header .month{
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.calendar .header .btns{
+    display: flex;
+    gap: 10px;
+}
+
+.calendar .header .btns .btn{
+  width: 50px; 
+  height: 40px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: #fff;
+  background-color:var(--primary-color) ;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.weekdays{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+
+}
+
+.weekdays .day{
+    width: calc(100%/7 - 10px);
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.days{
+   display: flex; 
+   flex-wrap: wrap;
+   gap: 10px;
+}
+
+.days .day{
+  width: calc(100%/7 - 10px);  
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  font-size:16px ;
+  font-weight: 400;
+  color: var(--text-color);
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.days .day:not(.next):not(.prev):hover{
+    background-color: var(--primary-color);
+    color: #fff;
+
+}
+
+#today{
+    background-color: var(--primary-color);
+    color: #fff; 
+}
+
+.days .day.next,
+.days .day.prev{
+    color: #ccc;
+}
+
+
+.welcome-message, .closing-message {
+    text-align: center;
+    margin: 15px 0;
+    font-size: 18px;
+    color: var(--primary-color);
+}
+
+
+.days .day.today {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    bottom: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: translateY(100%);
+}   
+
+.modal.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    animation: slideIn 0.7s forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    position: absolute;
+    left: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    bottom: 10%;
+    transform: translateX(-50%);
+    overflow-y: auto;
+
+    
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+
+#todo-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 5px 5px 5px;
+    margin-top: 10px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+
+}
+
+#todo-list li span {
+    flex-grow: 1;
+    margin-left: 10px;
+    word-break: break-word;
+}
+
+#todo-list li button {
+    margin-left: 10px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 3px 6px;
+    align-self: flex-start; 
+}
+
+#add-todo-btn{
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 3px 6px;
+}
+
+.no-tasks {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--primary-color);
+    margin: 20px 0;
+}
+
+.no-tasks i {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.days .day.travel {
+    background-color: blue;
+    color: white;
+}
+
+.days .day.consultation {
+    background-color: yellow;
+    color: black;
+}
+
+.consultation-table-container {
+    margin-top: 20px;
+}
+
+#consultation-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#consultation-table th, #consultation-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid var(--primary-color);
+}
+
+#consultation-table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#add-entry-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+#add-entry-btn:hover {
+    background-color: #d93c49;
+}
+
+
+

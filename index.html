@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="./scripts.js" defer></script>
+
+
+
+</head>
+<body>
+    <div class="container">
+       <div class="calendar">
+       
+        <div class="welcome-message">Here’s your calendar for today.</div>
+        
+        <div class="header">
+            <div class="month"></div>
+            <div class="btns">
+                <div class="btn today-btn">
+                    <i class="ri-calendar-event-line"></i> 
+                </div>
+                <div class="btn prev-btn">
+                <i class="ri-arrow-left-s-line"></i>
+                </div>
+                <div class="btn next-btn">
+                <i class="ri-arrow-right-s-line"></i>
+                </div>
+            </div>
+        </div>
+
+        
+        
+       <div class="weekdays">
+        <div class="day">Sun</div>
+        <div class="day">Mon</div>
+        <div class="day">Tue</div>
+        <div class="day">Wed</div>
+        <div class="day">Thur</div>
+        <div class="day">Fri</div>
+        <div class="day">Sat</div>
+       </div>
+
+       <div class="days"></div>
+
+
+    </div>
+
+    <div id="todo-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>To-Do List for <span id="modal-date"></span></h2>
+            <div id="no-tasks-message" class="no-tasks">
+                <i class="ri-calendar-event-line"></i> No tasks for today.
+            </div>
+            <input type="text" id="new-todo" placeholder="Add new to-do...">
+            <button id="add-todo-btn">Add</button>
+            <button id="add-consultation-btn">Add Consultation</button>
+            <div id="consultation-table-container" class="consultation-table-container" style="display: none;">
+                <h3>Private consultation List</h3>
+                <table id="consultation-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Surname</th>
+                            <th>Number</th>
+                            <th>Address</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                    </tbody>
+                </table>
+                <div id="no-consultations-message" style="display: none;">No consultations for this day.</div>
+                <button id="add-entry-btn">Add Entry</button>
+            </div>
+            
+            <ul id="todo-list"></ul>
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+</html>
